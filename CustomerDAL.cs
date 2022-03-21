@@ -43,7 +43,7 @@ namespace DataAccessLayer
             }
             catch
             {
-                throw;
+                return 0;
             }
         }
         public int DeleteCustomerDetails(Customer objBO)
@@ -59,92 +59,153 @@ namespace DataAccessLayer
                 scon.Close();
                 if (res == 0)
                 {
-                    throw new Exception("Customer ID already exists");
+                    throw new Exception("Customer ID does not exists");
                 }
                 return res;
             }
             catch
             {
-                throw;
+                return 0;
             }
         }
         public int UpdateCustomerFirstName(Customer objBO)
         {
-            SqlCommand cmd = new SqlCommand("sp_UpdateCusFirstName", scon);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@customer_id", objBO.Customer_ID);
-            cmd.Parameters.AddWithValue("@first_name", objBO.First_Name);
-            scon.Open();
-            int res = cmd.ExecuteNonQuery();
-            cmd.Dispose();
-            scon.Close();
-            return res;
+            try
+            {
+                SqlCommand cmd = new SqlCommand("sp_UpdateCusFirstName", scon);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@customer_id", objBO.Customer_ID);
+                cmd.Parameters.AddWithValue("@first_name", objBO.First_Name);
+                scon.Open();
+                int res = cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                scon.Close();
+                if (res == 0)
+                {
+                    throw new Exception("Customer ID does not exists");
+                }
+                return res;
+            }
+            catch
+            {
+                return 0;
+            }
         }
         public int UpdateCustomerMiddleName(Customer objBO)
         {
-            SqlCommand cmd = new SqlCommand("sp_UpdateCusMiddleName", scon);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@customer_id", objBO.Customer_ID);
-            cmd.Parameters.AddWithValue("@middle_name", objBO.Middle_Name);
-            scon.Open();
-            int res = cmd.ExecuteNonQuery();
-            cmd.Dispose();
-            scon.Close();
-            return res;
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("sp_UpdateCusMiddleName", scon);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@customer_id", objBO.Customer_ID);
+                    cmd.Parameters.AddWithValue("@middle_name", objBO.Middle_Name);
+                    scon.Open();
+                    int res = cmd.ExecuteNonQuery();
+                    cmd.Dispose();
+                    scon.Close();
+                    if (res == 0)
+                    {
+                    throw new Exception("Customer ID does not exists");
+                    }
+                return res;
+                }
+                catch
+                {
+                return 0;
+                }
         }
         public int UpdateCustomerLastName(Customer objBO)
         {
-            SqlCommand cmd = new SqlCommand("sp_UpdateCusLastName", scon);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@customer_id", objBO.Customer_ID);
-            cmd.Parameters.AddWithValue("@last_name", objBO.Last_Name);
-            scon.Open();
-            int res = cmd.ExecuteNonQuery();
-            cmd.Dispose();
-            scon.Close();
-            return res;
+                    try 
+                    { 
+                         SqlCommand cmd = new SqlCommand("sp_UpdateCusLastName", scon);
+                         cmd.CommandType = CommandType.StoredProcedure;
+                         cmd.Parameters.AddWithValue("@customer_id", objBO.Customer_ID);
+                         cmd.Parameters.AddWithValue("@last_name", objBO.Last_Name);
+                         scon.Open();
+                         int res = cmd.ExecuteNonQuery();
+                         cmd.Dispose();
+                         scon.Close();
+                         if (res == 0)
+                         {
+                            throw new Exception("Customer ID does not exists");
+                         }
+                         return res;
+                    }
+                    catch
+                     {
+                     return 0;
+                     }
         }
         public int UpdateCustomerPhone(Customer objBO)
         {
-            SqlCommand cmd = new SqlCommand("sp_UpdateCusPhone", scon);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@customer_id", objBO.Customer_ID);
-            cmd.Parameters.AddWithValue("@phone", objBO.Phone);
-            scon.Open();
-            int res = cmd.ExecuteNonQuery();
-            cmd.Dispose();
-            scon.Close();
-            return res;
+                        try
+                        {
+                            SqlCommand cmd = new SqlCommand("sp_UpdateCusPhone", scon);
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@customer_id", objBO.Customer_ID);
+                            cmd.Parameters.AddWithValue("@phone", objBO.Phone);
+                            scon.Open();
+                            int res = cmd.ExecuteNonQuery();
+                            cmd.Dispose();
+                            scon.Close();
+                            if (res == 0)
+                            {
+                               throw new Exception("Customer ID does not exists");
+                            }
+                        return res;
+                        }
+                        catch
+                        {
+                        return 0;
+                        }
         }
         public int UpdateCustomerAddress(Customer objBO)
         {
-           
-            SqlCommand cmd = new SqlCommand("sp_UpdateCusAddress", scon);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@customer_id", objBO.Customer_ID);
-            cmd.Parameters.AddWithValue("@address", objBO.Address);
-            scon.Open();
-            int res = cmd.ExecuteNonQuery();
-            cmd.Dispose();
-            scon.Close();
-                
-            return res;
-            
+                            try
+                            {
+                                SqlCommand cmd = new SqlCommand("sp_UpdateCusAddress", scon);
+                                cmd.CommandType = CommandType.StoredProcedure;
+                                cmd.Parameters.AddWithValue("@customer_id", objBO.Customer_ID);
+                                cmd.Parameters.AddWithValue("@address", objBO.Address);
+                                scon.Open();
+                                int res = cmd.ExecuteNonQuery();
+                                cmd.Dispose();
+                                scon.Close();
+                                 if (res == 0)
+                                 {
+                                    throw new Exception("Customer ID does not exists");
+                                 }
+                             return res;
+                            }
+                             catch
+                            {
+                             return 0;
+                            }
+
+
         }
         public int UpdateCustomerEmail(Customer objBO)
         {
-           
-            SqlCommand cmd = new SqlCommand("sp_UpdateCusEmail", scon);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@customer_id", objBO.Customer_ID);
-            cmd.Parameters.AddWithValue("@email", objBO.Email);
-            scon.Open();
-            int res = cmd.ExecuteNonQuery();
-            cmd.Dispose();
-            scon.Close();
-                
-            return res;
-            
+                                try
+                                {
+                                    SqlCommand cmd = new SqlCommand("sp_UpdateCusEmail", scon);
+                                    cmd.CommandType = CommandType.StoredProcedure;
+                                    cmd.Parameters.AddWithValue("@customer_id", objBO.Customer_ID);
+                                    cmd.Parameters.AddWithValue("@email", objBO.Email);
+                                    scon.Open();
+                                    int res = cmd.ExecuteNonQuery();
+                                    cmd.Dispose();
+                                    scon.Close();
+                                return res;
+                                }
+                                catch
+                                {
+                                 return 0;
+                                }
+
+
+
         }
         public DataSet ShowCustomerDetails()
         {

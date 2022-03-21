@@ -35,13 +35,15 @@ namespace DataAccessLayer
                 scon.Close();
                 if (res == 0)
                 {
+                   
                     throw new Exception("Product ID already exists");
                 }
                 return res;
             }
             catch
             {
-                throw;
+                //return 0;
+                return 0;
             }
         }
         public int DeleteProductDetails(Product objBO)
@@ -57,13 +59,13 @@ namespace DataAccessLayer
                 scon.Close();
                 if (res == 0)
                 {
-                    throw new Exception("Product ID already exists");
+                    throw new Exception("Product ID does not exists");
                 }
                 return res;
             }
             catch
             {
-                throw;
+                return 0;
             }
         }
         public int DeleteProductWithNoPreference()
@@ -85,23 +87,37 @@ namespace DataAccessLayer
             }
             catch
             {
-                throw;
+                return 0;
             }
         }
         public int UpdateProductPrice(Product objBO)
         {
-            SqlCommand cmd = new SqlCommand("sp_UpdateProPrice", scon);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@product_id", objBO.Product_ID);
-            cmd.Parameters.AddWithValue("@listing_price", objBO.Listing_Price);
-            scon.Open();
-            int res = cmd.ExecuteNonQuery();
-            cmd.Dispose();
-            scon.Close();
-            return res;
+            try
+            {
+                SqlCommand cmd = new SqlCommand("sp_UpdateProPrice", scon);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@product_id", objBO.Product_ID);
+                cmd.Parameters.AddWithValue("@listing_price", objBO.Listing_Price);
+                scon.Open();
+                int res = cmd.ExecuteNonQuery();
+                cmd.Dispose();
+                scon.Close();
+
+                if (res == 0)
+                {
+                    throw new Exception("Product ID does not exists");
+                }
+                return res;
+            }
+
+            catch
+            {
+                return 0;
+            }
         }
         public int UpdateProductQuantity(Product objBO)
         {
+            try { 
             SqlCommand cmd = new SqlCommand("sp_UpdateProQuantity", scon);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@product_id", objBO.Product_ID);
@@ -110,7 +126,17 @@ namespace DataAccessLayer
             int res = cmd.ExecuteNonQuery();
             cmd.Dispose();
             scon.Close();
-            return res;
+                if (res == 0)
+                {
+                    throw new Exception("Product ID does not exists");
+                }
+                return res;
+            }
+
+            catch
+            {
+                return 0;
+            }
         }
         public int UpdateProductQuan_in_hand(Product objBO,OrderLine obj)
         {

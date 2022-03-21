@@ -84,7 +84,7 @@ namespace DataAccessLayer
                 scon.Close();
                 if (res == 0)
                 {
-                    throw new Exception("Order ID already exists");
+                    throw new Exception("Order ID does not exists");
                 }
                 return res;
             }
