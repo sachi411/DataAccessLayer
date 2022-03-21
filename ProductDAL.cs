@@ -138,18 +138,7 @@ namespace DataAccessLayer
                 return 0;
             }
         }
-        public int UpdateProductQuan_in_hand(Product objBO,OrderLine obj)
-        {
-            SqlCommand cmd = new SqlCommand("sp_UpdateProQuantityAfterOrderLine", scon);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@product_id", objBO.Product_ID);
-            cmd.Parameters.AddWithValue("@quantity_ordered", obj.Quantity_ordered);
-            scon.Open();
-            int res = cmd.ExecuteNonQuery();
-            cmd.Dispose();
-            scon.Close();
-            return res;
-        }
+        
         public DataSet ShowProductDetails()
         {
             SqlCommand cmd = new SqlCommand("sp_ShowProDetails", scon);

@@ -44,7 +44,7 @@ namespace DataAccessLayer
             }
             catch
             {
-                throw;
+                return 0;
             }
         }
         public int UpdateOrderAmount(Order objBO)
@@ -61,13 +61,13 @@ namespace DataAccessLayer
                 scon.Close();
                 if (res == 0)
                 {
-                    throw new Exception("Order ID already exists");
+                    throw new Exception("Order ID does not exists");
                 }
                 return res;
             }
             catch
             {
-                throw;
+                return 0;
             }
         }
         public int DeleteOrderDetails(Order objBO)
@@ -90,7 +90,7 @@ namespace DataAccessLayer
             }
             catch
             {
-                throw;
+                return 0;
             }
         }
         public int UpdateOrderDetailsbeforeNew(Order ordD)
@@ -115,7 +115,7 @@ namespace DataAccessLayer
             }
             catch
             {
-                throw;
+                return 0;
             }
 
         }
@@ -128,6 +128,21 @@ namespace DataAccessLayer
             SqlDataAdapter daDept = new SqlDataAdapter(cmd);
             daDept.Fill(dsDept);
              
+            cmd.Dispose();
+            scon.Close();
+            return dsDept;
+
+        }
+        public DataSet ShowOrderDetailsbyid(Order obj)
+        {
+            SqlCommand cmd = new SqlCommand("sp_ShowOrdDetailsbyid", scon);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@order_id", obj.Order_ID);
+            scon.Open();
+            DataSet dsDept = new DataSet();
+            SqlDataAdapter daDept = new SqlDataAdapter(cmd);
+            daDept.Fill(dsDept);
+
             cmd.Dispose();
             scon.Close();
             return dsDept;
